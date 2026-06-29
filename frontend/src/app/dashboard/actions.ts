@@ -15,6 +15,9 @@ export async function getServerApi() {
     .map((c) => `${c.name}=${c.value}`)
     .join("; ");
 
+  console.log(cookieStore.getAll());
+  console.log(cookieStore.get("jwt"));
+
   return axios.create({
     baseURL: backendUrl,
     headers: {
