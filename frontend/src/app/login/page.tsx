@@ -4,6 +4,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth";
+import { cookies } from "next/headers";
 import {
   ArrowRight,
   GitBranch,
@@ -87,6 +88,14 @@ export default function LoginPage() {
         setError(`${isSignup ? "Signup" : "Sign in"} failed. Token missing.`);
         return;
       }
+
+      const cookieStore = await cookies();
+      cookieStore.set ("jwt", data.access_token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "lax",
+        path: "/",
+      });
 
       await refreshUser();
       router.push("/dashboard");
