@@ -4,7 +4,6 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth";
-import { cookies } from "next/headers";
 import {
   ArrowRight,
   GitBranch,
