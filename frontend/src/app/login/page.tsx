@@ -89,12 +89,14 @@ export default function LoginPage() {
         return;
       }
 
-      const cookieStore = await cookies();
-      cookieStore.set ("jwt", data.access_token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "lax",
-        path: "/",
+      await fetch("/api/session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token: data.access_token,
+        }),
       });
 
       await refreshUser();
