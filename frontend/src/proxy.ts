@@ -17,6 +17,10 @@ export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const token = req.cookies.get("jwt")?.value;
   const hasValidToken = token ? await isValidJWT(token) : false;
+  console.log("Middleware running");
+  console.log("JWT:", token);
+  console.log("SECRET:", process.env.NEXT_PUBLIC_JWT_SECRET);
+  console.log("Is Valid: ", hasValidToken)
   const isProtectedRoute = protectedRoutes.some(
     (route) => pathname === route || pathname.startsWith(`${route}/`),
   );
