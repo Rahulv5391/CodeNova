@@ -102,7 +102,7 @@ export async function getChatSessions() {
 export async function getChatSession(sessionId: string) {
   try {
     const { data } = await api.get<ChatSessionDetailResponse>(
-      `/sessions/${sessionId}`,
+      `/chat/sessions/${sessionId}`,
     );
 
     return normalizeChatSessionDetail(data);
